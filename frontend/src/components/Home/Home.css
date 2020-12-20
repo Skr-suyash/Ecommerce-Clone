@@ -1,0 +1,17 @@
+.home {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 1500px;
+}
+
+.home__row {
+    display: flex;
+    z-index: 1;
+    margin: 0 5px;
+}
+
+.home__img {
+    width: 100%;
+    z-index: -1;
+}

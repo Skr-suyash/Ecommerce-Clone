@@ -10,6 +10,8 @@
 }
 
 .header__logo {
+    display: flex;
+    flex: 0.1;
     height: 65px;
     width: 65px;
     object-fit: contain;

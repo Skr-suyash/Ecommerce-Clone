@@ -29,13 +29,13 @@ export default function Home() {
             title="JBL Live 500BT Wireless Over-Ear Voice Enabled Headphones"
             price={100}
             imageLink="https://images-na.ssl-images-amazon.com/images/I/81eLiL6SApL._SL1500_.jpg"
-            rating="4"
+            rating={4}
           />
           <Product
             title="Harry Potter"
-            price="10"
+            price={10}
             imageLink="/book.jpg"
-            rating="4"
+            rating={4}
           />
         </div>
 

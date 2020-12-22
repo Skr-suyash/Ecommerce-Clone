@@ -2,6 +2,7 @@ import React from 'react';
 import './Header.css';
 import SearchIcon from '@material-ui/icons/Search';
 import ShoppingBasket from '@material-ui/icons/ShoppingBasket';
+import { Link } from 'react-router-dom';
 
 export default function Header() {
   return (
@@ -26,11 +27,13 @@ export default function Header() {
               <span className="header__optionLineTwo">& Returns</span>
             </div>
 
-            <div className="header__option__cart">
-              <ShoppingBasket />
-              <span className="header__optionLineTwo">Cart</span>
-              <span className="header__cart_value">0</span>
-            </div>
+            <Link to="/cart">
+              <div className="header__option__cart">
+                <ShoppingBasket />
+                <span className="header__optionLineTwo">Cart</span>
+                <span className="header__cart_value">0</span>
+              </div>
+            </Link>
           </div>
         </div>
       </div>

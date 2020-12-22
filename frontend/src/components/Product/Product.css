@@ -26,6 +26,9 @@
 
 .product > .product__button {
     margin-top: 10px;
+    width: 10em;
+    padding: 5px;
+    background-color: #ffd66b;
 }
 
 .product__price {

@@ -1,0 +1,22 @@
+.cart {
+    background-color: white;
+    display: flex;
+    padding: 40px;
+    height: max-content;
+}
+
+.cart__left {
+    display: flex;
+    flex: 1;
+}
+
+.cart__right {
+    display: flex;
+}
+
+.cart__hero {
+    width: 100%;
+    border-bottom: 2px solid lightgray;
+    padding: 10px;
+    margin-right: 10px;
+}

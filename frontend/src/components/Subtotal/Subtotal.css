@@ -1,0 +1,9 @@
+.subtotal {
+    background-color: #f8f1f1;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 0 20px;
+}
+.subtotal__text {
+    font-size: 20px;
+}

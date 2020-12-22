@@ -1,6 +1,7 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import './Product.css';
+import Button from '@material-ui/core/Button';
+import PropTypes from 'prop-types';
 
 export default function Product({
   title, price, imageLink, rating,
@@ -23,7 +24,14 @@ export default function Product({
         ))}
       </div>
 
-      <button className="product__button" type="button">Add to Cart</button>
+      <Button variant="contained" color="primary"> Add to Cart </Button>
     </div>
   );
 }
+
+Product.propTypes = {
+  title: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  imageLink: PropTypes.string.isRequired,
+  rating: PropTypes.number.isRequired,
+};

@@ -10,6 +10,7 @@
     min-width: 100px;
     background-color: white;
     z-index: 1;
+    cursor: pointer;
 }
 
 .product > img {
@@ -25,6 +26,9 @@
 
 .product > .product__button {
     margin-top: 10px;
+    width: 10em;
+    padding: 5px;
+    background-color: #ffd66b;
 }
 
 .product__price {

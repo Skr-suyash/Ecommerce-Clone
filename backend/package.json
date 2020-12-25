@@ -1,0 +1,29 @@
+{
+  "name": "ecommerce-clone-backend",
+  "version": "1.0.0",
+  "description": "Backend for the ecommerce clone",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^7.16.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "nodemon": "^2.0.6"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "connect-mongo": "^3.2.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "mongoose": "^5.11.8",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "validator": "^13.5.2"
+  }
+}

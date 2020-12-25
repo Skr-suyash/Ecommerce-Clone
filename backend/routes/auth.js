@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 require('../passport/setup')(passport);
 
 const router = express.Router();
+const checkAuthenticated = require('../util/auth/checkAuthenticated');
 const User = require('../models/Users');
 
 // Register route
@@ -26,13 +27,23 @@ router.post('/register', async (req, res) => {
 });
 
 // Login Route
-router.post('/login', async (req, res, next) => {
+router.post('/login', (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
-    if (err) return res.send(err);
-    // Send the requires error message
-    if (!user) return res.send(info.message);
-    return res.send(user);
+    if (err) return res.status(500).send(err);
+    // Send the requires=d error message
+    if (!user) return res.status(400).send(info.message);
+    // Initiate login
+    req.logIn(user, (loginErr) => {
+      if (err) return res.status(500).send(loginErr);
+      return res.send(user);
+    });
+    return null;
   })(req, res, next);
+});
+
+router.post('/logout', checkAuthenticated, (req, res) => {
+  req.logOut();
+  res.redirect('/');
 });
 
 module.exports = router;

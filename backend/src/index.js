@@ -19,9 +19,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(
   session({
     secret: 'cacacasdcscfcssfc',
-    resave: false,
+    resave: true,
     saveUninitialized: true,
-    store: new MongoStore({ mongooseConnection: mongoose.connection }),
+    // Set up MongoStore to save sessions
+    store: new MongoStore({ mongooseConnection: mongoose.connection, collection: 'sessions' }),
   }),
 );
 

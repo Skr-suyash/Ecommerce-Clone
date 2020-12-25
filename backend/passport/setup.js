@@ -4,41 +4,36 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('../models/Users');
 
+// Serialize and store in session
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
-passport.deserializeUser((id, done) => {
-  User.findById(id, (err, user) => {
-    done(err, user);
-  });
+passport.deserializeUser(async (id, done) => {
+  const user = await User.findById(id);
+  done(null, user);
 });
 
-passport.use(
-  new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
-    User.findOne({ email })
-      .then((user) => {
-        if (!user) {
-          const newUser = new User({ email, password });
-          bcrypt.genSalt(10, (err, salt) => {
-            bcrypt.hash(newUser.password, salt, (err, hash) => {
-              if (err) throw err;
-              newUser.password = hash;
-              newUser.save()
-                .then((savedUser) => done(null, savedUser))
-                .catch((err) => done(null, false, { message: err }));
-            });
-          });
-        } else {
-          bcrypt.compare(passport, user.password, (err, isMatch) => {
-            if (err) throw err;
-            if (isMatch) {
-              return done(null, user);
-            }
-            return done(null, false, { message: 'Wrong Password' });
-          });
+// Passport Local Configuration
+module.exports = (passport) => {
+  passport.use(
+    // eslint-disable-next-line consistent-return
+    new LocalStrategy({ usernameField: 'email' }, async (email, password, done) => {
+      // Match user
+      const user = await User.findOne({ email });
+      if (!user) {
+        return done(null, false, { message: 'No user found' });
+      }
+
+      // Compare the passwords
+      bcrypt.compare(password, user.password, (err, isMatch) => {
+        if (err) throw err;
+        if (!isMatch) {
+          return done(null, false, { message: 'Incorrect Password' });
         }
-      })
-      .catch((err) => done(null, false, { message: err }));
-  }),
-);
+        // Send the user
+        return done(null, user);
+      });
+    }),
+  );
+};

@@ -1,22 +1,38 @@
 import { React, useState } from 'react';
 import './Login.css';
-
 import Button from '@material-ui/core/Button';
+import ErrorIcon from '@material-ui/icons/Error';
+
+import apiCalls from '../../api-config';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loginError, setLoginError] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // eslint-disable-next-line no-console
-    console.log(email, password);
+    const response = await apiCalls.loginUser(email, password);
+    if (response.status !== 200) {
+      setLoginError(response.data);
+    }
   };
 
   return (
     <div className="signin">
       <div className="signin__top">
         <h1 className="signin__hero">Login</h1>
+
+        {/* Error Message */}
+        {loginError
+          ? (
+            <span className="signin__error">
+              <ErrorIcon className="signin__error_icon" />
+              {loginError}
+            </span>
+          )
+          : null}
 
         {/* Form */}
         <form onSubmit={handleSubmit}>

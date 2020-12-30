@@ -61,3 +61,15 @@
     width: 20em !important;
 }
 
+.signin__error {
+    color: red;
+    display: flex;
+    font-size: 17px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.signin__error_icon {
+    margin-right: 10px !important;
+}

@@ -1,4 +1,5 @@
 import { React, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import './Login.css';
 import Button from '@material-ui/core/Button';
 import ErrorIcon from '@material-ui/icons/Error';
@@ -6,6 +7,9 @@ import ErrorIcon from '@material-ui/icons/Error';
 import apiCalls from '../../api-config';
 
 export default function Login() {
+  // Initialize useHistory hook
+  const history = useHistory();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState(null);
@@ -17,6 +21,10 @@ export default function Login() {
     if (response.status !== 200) {
       setLoginError(response.data);
     }
+    // Save to user to sessionStorage
+    sessionStorage.setItem('user', JSON.stringify(response.data));
+    // Redirect
+    history.push('/');
   };
 
   return (

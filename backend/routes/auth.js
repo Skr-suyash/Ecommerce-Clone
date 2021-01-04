@@ -35,7 +35,14 @@ router.post('/login', (req, res, next) => {
     // Initiate login
     req.logIn(user, (loginErr) => {
       if (err) return res.status(500).send(loginErr);
-      return res.send(user);
+      // Create a parsed user without password
+      const parsedUser = {
+        // eslint-disable-next-line no-underscore-dangle
+        id: user._id,
+        name: user.name,
+        email: user.email,
+      };
+      return res.send(parsedUser);
     });
     return null;
   })(req, res, next);

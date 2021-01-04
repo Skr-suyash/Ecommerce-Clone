@@ -3,6 +3,7 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const mongoose = require('mongoose');
 const passport = require('passport');
+const cors = require('cors');
 require('../util/db/mongoose');
 require('../passport/setup');
 
@@ -14,6 +15,9 @@ const PORT = process.env.PORT || 8000;
 // BodyParser middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+// CORS Middleware
+app.use(cors());
 
 // Express Session
 app.use(

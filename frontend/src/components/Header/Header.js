@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import './Header.css';
 import SearchIcon from '@material-ui/icons/Search';
 import ShoppingBasket from '@material-ui/icons/ShoppingBasket';
 import { Link } from 'react-router-dom';
+import { UserContext } from '../../context/userContext';
 
 export default function Header() {
+  const user = useContext(UserContext);
+  useEffect(() => {
+    const userStored = localStorage.getItem('user');
+    if (userStored) {
+      const foundUser = JSON.parse(userStored);
+      user.setUser(foundUser);
+    }
+  }, []);
+
   return (
     <div>
       <div>
@@ -17,10 +27,16 @@ export default function Header() {
           </div>
 
           <div className="header__nav">
-            <div className="header__option">
-              <span className="header__optionLineOne">Hello, Guest</span>
-              <span className="header__optionLineTwo">Sign, In</span>
-            </div>
+            <Link to={!user.user ? '/login' : '/#'}>
+              <div className="header__option">
+                <span className="header__optionLineOne">
+                  Hello,
+                  {' '}
+                  { user.user ? null : 'Guest' }
+                </span>
+                <span className="header__optionLineTwo">{ user.user ? user.user.name : 'Sign In' }</span>
+              </div>
+            </Link>
 
             <div className="header__option">
               <span className="header__optionLineOne">My Orders</span>

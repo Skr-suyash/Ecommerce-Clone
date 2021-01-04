@@ -1,20 +1,9 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext, useEffect } from 'react';
-import { UserContext } from '../../context/userContext';
 import Product from '../Product/Product';
 import './Home.css';
 
 export default function Home() {
-  const user = useContext(UserContext);
-  useEffect(() => {
-    const userStored = sessionStorage.getItem('user');
-    if (userStored) {
-      const foundUser = JSON.parse(userStored);
-      user.setUser(foundUser);
-      console.log(user);
-    }
-  }, []);
-
   return (
     <div className="home">
       <div className="home_container">

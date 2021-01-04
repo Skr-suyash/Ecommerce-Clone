@@ -1,6 +1,6 @@
 import { React, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import './Login.css';
+import '../Login/Login.css';
 import Button from '@material-ui/core/Button';
 import ErrorIcon from '@material-ui/icons/Error';
 
@@ -10,16 +10,17 @@ export default function Login() {
   // Initialize useHistory hook
   const history = useHistory();
 
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [loginError, setLoginError] = useState(null);
+  const [signUpError, setSignUpError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     // eslint-disable-next-line no-console
-    const response = await apiCalls.loginUser(email, password);
+    const response = await apiCalls.signUpUser(name, email, password);
     if (response.status !== 200) {
-      setLoginError(response.data);
+      setSignUpError(response.data);
     } else {
       // Save to user to sessionStorage
       localStorage.setItem('user', JSON.stringify(response.data));
@@ -31,20 +32,29 @@ export default function Login() {
   return (
     <div className="signin">
       <div className="signin__top">
-        <h1 className="signin__hero">Login</h1>
+        <h1 className="signin__hero">Create an Account</h1>
 
         {/* Error Message */}
-        {loginError
+        {signUpError
           ? (
             <span className="signin__error">
               <ErrorIcon className="signin__error_icon" />
-              {loginError}
+              {signUpError}
             </span>
           )
           : null}
 
         {/* Form */}
         <form onSubmit={handleSubmit}>
+          <span className="signin__info">Name</span>
+          <input
+            required
+            type="text"
+            className="signin__input"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+
           <span className="signin__info">Email</span>
           <input
             required
@@ -73,10 +83,11 @@ export default function Login() {
           By continuing, you agree to Shopee&apos;s Conditions of Use and Privacy Notice.
         </span>
       </div>
+
       <div className="signin__bottom">
-        <span className="signin__redirect">New to Shopee?</span>
-        <Link to="/signup">
-          <Button className="signin__button" color="secondary" variant="contained">Create an Account</Button>
+        <span className="signin__redirect">Already have an account?</span>
+        <Link to="/login">
+          <Button className="signin__button" color="secondary" variant="contained">Login to Shopee</Button>
         </Link>
       </div>
     </div>

@@ -7,6 +7,7 @@ import Header from './components/Header/Header';
 import Home from './components/Home/Home';
 import Cart from './components/Cart/Cart';
 import Login from './components/Login/Login';
+import SignUp from './components/SignUp/SignUp';
 import { UserContext, UserProvider } from './context/userContext';
 
 function App() {
@@ -24,6 +25,9 @@ function App() {
             </Route>
             <Route exact path="/login">
               <Login />
+            </Route>
+            <Route exact path="/signup">
+              <SignUp />
             </Route>
           </Switch>
         </Router>

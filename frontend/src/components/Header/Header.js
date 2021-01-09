@@ -1,12 +1,20 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './Header.css';
+import { Link } from 'react-router-dom';
+import { IconButton } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import ShoppingBasket from '@material-ui/icons/ShoppingBasket';
-import { Link } from 'react-router-dom';
+import Menu from '@material-ui/icons/Menu';
 import { UserContext } from '../../context/userContext';
+import Sidebar from '../Sidebar/Sidebar';
 
 export default function Header() {
+  // States
+  const [openSidebar, setOpenSidebar] = useState(false);
+
+  // Context
   const user = useContext(UserContext);
+
   useEffect(() => {
     const userStored = localStorage.getItem('user');
     if (userStored) {
@@ -15,12 +23,27 @@ export default function Header() {
     }
   }, []);
 
+  /**
+   * Function to oprn the sidebar
+   * @param {Boolean} open
+   */
+  const toggleDrawer = (open) => (event) => {
+    if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+    setOpenSidebar(open);
+  };
+
   return (
     <div>
       <div>
         <div className="header">
+          {/* SideBar */}
+          <Sidebar open={openSidebar} onOpen={toggleDrawer(true)} onClose={toggleDrawer(false)} />
+          <IconButton onClick={toggleDrawer(true)}>
+            <Menu className="header__menuIcon" />
+          </IconButton>
           <img className="header__logo" src="/logo.png" alt="Logo" />
-
           <div className="header__search">
             <input className="header__searchInput" />
             <SearchIcon className="header__search_icon" />
@@ -32,9 +55,9 @@ export default function Header() {
                 <span className="header__optionLineOne">
                   Hello,
                   {' '}
-                  { user.user ? null : 'Guest' }
+                  {user.user ? null : 'Guest'}
                 </span>
-                <span className="header__optionLineTwo">{ user.user ? user.user.name : 'Sign In' }</span>
+                <span className="header__optionLineTwo">{user.user ? user.user.name : 'Sign In'}</span>
               </div>
             </Link>
 

@@ -12,6 +12,13 @@
     font-weight: bold;
 }
 
+.signin__container {
+    padding: 30px;
+    border: solid 2px #ccaeb9;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
 a {
     text-decoration: none;
 }

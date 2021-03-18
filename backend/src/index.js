@@ -8,6 +8,7 @@ require('../util/db/mongoose');
 require('../passport/setup');
 
 const auth = require('../routes/auth');
+const userRouter = require('../routes/user');
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -34,9 +35,11 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Routes
+// Routers
 app.use('/api/auth', auth);
+app.use('/api/user', userRouter);
 
+// Routes
 app.get('/', (req, res) => {
   res.send('hello world');
 });

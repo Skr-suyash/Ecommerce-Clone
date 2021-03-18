@@ -13,13 +13,17 @@ export default function Header() {
   const [openSidebar, setOpenSidebar] = useState(false);
 
   // Context
-  const user = useContext(UserContext);
+  const userContext = useContext(UserContext);
 
   useEffect(() => {
     const userStored = localStorage.getItem('user');
     if (userStored) {
       const foundUser = JSON.parse(userStored);
-      user.setUser(foundUser);
+      userContext.setUser({
+        id: foundUser.id,
+        email: foundUser.email,
+        name: foundUser.name,
+      });
     }
   }, []);
 
@@ -50,14 +54,14 @@ export default function Header() {
           </div>
 
           <div className="header__nav">
-            <Link to={!user.user ? '/login' : '/#'}>
+            <Link to={!userContext.user ? '/login' : '/#'}>
               <div className="header__option">
                 <span className="header__optionLineOne">
                   Hello,
                   {' '}
-                  {user.user ? null : 'Guest'}
+                  {userContext.user ? null : 'Guest'}
                 </span>
-                <span className="header__optionLineTwo">{user.user ? user.user.name : 'Sign In'}</span>
+                <span className="header__optionLineTwo">{userContext.user ? userContext.user.name : 'Sign In'}</span>
               </div>
             </Link>
 

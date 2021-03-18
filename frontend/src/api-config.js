@@ -45,6 +45,21 @@ const apiCalls = {
     }
     return response;
   },
+
+  /**
+   * FUnction to give seller privileges to a user
+   * @param {String} userId
+   */
+  becomeSeller: async (userId) => {
+    const endpoint = `${url}/user/become-a-seller/${userId}`;
+    let response = null;
+    try {
+      response = axios.put(endpoint);
+    } catch (error) {
+      return error.response;
+    }
+    return response;
+  },
 };
 
 export default apiCalls;

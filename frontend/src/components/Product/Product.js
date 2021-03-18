@@ -8,16 +8,17 @@ export default function Product({
 }) {
   return (
     <div className="product">
-      <div className="product__info">
-        <p>{ title }</p>
-        <p className="product__price">
-          <small>$</small>
-          <strong>{ price }</strong>
-        </p>
-      </div>
-
       <img src={imageLink} alt="book" />
 
+      <div className="product__info">
+        <p className="product__title">{title}</p>
+        <p className="product__price">
+          <small>$</small>
+          {price}
+          {' '}
+          <small>USD</small>
+        </p>
+      </div>
       <div className="product__rating">
         {Array(rating).fill().map(() => (
           <p>⭐</p>

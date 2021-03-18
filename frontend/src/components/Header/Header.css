@@ -9,6 +9,10 @@
     top: 0;
 }
 
+.header__menuIcon {
+    color: white;
+}
+
 .header__logo {
     display: flex;
     flex: 0.1;

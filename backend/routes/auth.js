@@ -20,9 +20,16 @@ router.post('/register', async (req, res) => {
   try {
     // Save the user
     await newUser.save();
-    res.send(newUser);
+    const parsedUser = {
+      // eslint-disable-next-line no-underscore-dangle
+      id: newUser._id,
+      name: newUser.name,
+      email: newUser.email,
+      seller: newUser.seller,
+    };
+    return res.send(parsedUser);
   } catch (err) {
-    res.status(500).send(err);
+    return res.status(500).send(err);
   }
 });
 
@@ -41,6 +48,7 @@ router.post('/login', (req, res, next) => {
         id: user._id,
         name: user.name,
         email: user.email,
+        seller: user.seller,
       };
       return res.send(parsedUser);
     });

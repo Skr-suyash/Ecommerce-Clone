@@ -8,6 +8,7 @@ import Home from './components/Home/Home';
 import Cart from './components/Cart/Cart';
 import Login from './components/Login/Login';
 import SignUp from './components/SignUp/SignUp';
+import BecomeSeller from './components/BecomeSeller/BecomeSeller';
 import { UserContext, UserProvider } from './context/userContext';
 
 function App() {
@@ -28,6 +29,9 @@ function App() {
             </Route>
             <Route exact path="/signup">
               <SignUp />
+            </Route>
+            <Route exact path="/become-a-seller">
+              <BecomeSeller />
             </Route>
           </Switch>
         </Router>

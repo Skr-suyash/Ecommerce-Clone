@@ -6,7 +6,7 @@ mongoose.connect(DB_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
-  useFindAndModify: true,
+  useFindAndModify: false,
 })
   // eslint-disable-next-line no-console
   .then(console.log(`MongoDB Connected on ${DB_URL}`))

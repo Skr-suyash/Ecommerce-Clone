@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import Product from '../Product/Product';
 import './Home.css';
 
@@ -8,16 +8,6 @@ export default function Home() {
     <div className="home">
       <div className="home_container">
         <img className="home__img" src="/background.jpg" alt="bg-img" />
-
-        <div className="home__row">
-          <Product
-            title="OnePlus Nord 5G (Gray Onyx, 8GB RAM, 128GB Storage)"
-            price={899}
-            imageLink="https://image01.oneplus.net/shop/202010/13/1-M00-1B-6B-rB8LB1-FTY-AajLfAAG8vTeOwJ8010.png"
-            rating={4}
-          />
-          <Product title="Harry Potter and the Prisoner of Azkaban" price={10} imageLink="/book.jpg" rating={4} />
-        </div>
 
         <div className="home__row">
           <Product
@@ -37,15 +27,6 @@ export default function Home() {
             price={10}
             imageLink="/book.jpg"
             rating={4}
-          />
-        </div>
-
-        <div className="home__row">
-          <Product
-            title="Inalsa 60 cm 1200 m³/hr Auto Clean Filterless Chimney"
-            price={400}
-            imageLink="https://images-na.ssl-images-amazon.com/images/I/61nqkR-d89L._SL1200_.jpg"
-            rating={3}
           />
         </div>
       </div>

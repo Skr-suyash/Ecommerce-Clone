@@ -1,0 +1,15 @@
+.becomeSeller {
+    display: flex;
+    height: calc(100vh - 15rem);
+    align-items: center;
+    justify-content: center;
+}
+
+.becomeSeller__card {
+    padding: 40px;
+}
+
+.becomeSeller__card__info {
+    font-size: 15px;
+    margin-bottom: 4em;
+}

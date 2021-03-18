@@ -4,7 +4,7 @@ import './Login.css';
 import Button from '@material-ui/core/Button';
 import ErrorIcon from '@material-ui/icons/Error';
 
-import apiCalls from '../../api-config';
+import apiCalls from '../../apiCalls';
 
 export default function Login() {
   // Initialize useHistory hook

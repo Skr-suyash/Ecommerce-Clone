@@ -1,6 +1,7 @@
 const express = require('express');
 const passport = require('passport');
 const bcrypt = require('bcrypt');
+const parseUser = require('../util/auth/parseUser');
 require('../passport/setup')(passport);
 
 const router = express.Router();
@@ -20,13 +21,7 @@ router.post('/register', async (req, res) => {
   try {
     // Save the user
     await newUser.save();
-    const parsedUser = {
-      // eslint-disable-next-line no-underscore-dangle
-      id: newUser._id,
-      name: newUser.name,
-      email: newUser.email,
-      seller: newUser.seller,
-    };
+    const parsedUser = parseUser(newUser);
     return res.send(parsedUser);
   } catch (err) {
     return res.status(500).send(err);
@@ -37,19 +32,13 @@ router.post('/register', async (req, res) => {
 router.post('/login', (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
     if (err) return res.status(500).send(err);
-    // Send the requires=d error message
+    // Send the required error message
     if (!user) return res.status(400).send(info.message);
     // Initiate login
     req.logIn(user, (loginErr) => {
       if (err) return res.status(500).send(loginErr);
       // Create a parsed user without password
-      const parsedUser = {
-        // eslint-disable-next-line no-underscore-dangle
-        id: user._id,
-        name: user.name,
-        email: user.email,
-        seller: user.seller,
-      };
+      const parsedUser = parseUser(user);
       return res.send(parsedUser);
     });
     return null;

@@ -1,30 +1,21 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Header.css';
 import { Link } from 'react-router-dom';
 import { IconButton } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import ShoppingBasket from '@material-ui/icons/ShoppingBasket';
 import Menu from '@material-ui/icons/Menu';
-import { UserContext } from '../../context/userContext';
 import Sidebar from '../Sidebar/Sidebar';
 
 export default function Header() {
   // States
   const [openSidebar, setOpenSidebar] = useState(false);
-
-  // Context
-  const userContext = useContext(UserContext);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const userStored = localStorage.getItem('user');
-    if (userStored) {
-      const foundUser = JSON.parse(userStored);
-      userContext.setUser({
-        id: foundUser.id,
-        email: foundUser.email,
-        name: foundUser.name,
-      });
-    }
+    const parsedUser = JSON.parse(userStored);
+    setUser(parsedUser);
   }, []);
 
   /**
@@ -48,20 +39,21 @@ export default function Header() {
             <Menu className="header__menuIcon" />
           </IconButton>
           <img className="header__logo" src="/logo.png" alt="Logo" />
+          <span className="header__name">Shopee</span>
           <div className="header__search">
             <input className="header__searchInput" />
             <SearchIcon className="header__search_icon" />
           </div>
 
           <div className="header__nav">
-            <Link to={!userContext.user ? '/login' : '/#'}>
+            <Link to={user ? '/#' : '/login'}>
               <div className="header__option">
                 <span className="header__optionLineOne">
                   Hello,
                   {' '}
-                  {userContext.user ? null : 'Guest'}
+                  {user ? null : 'Guest'}
                 </span>
-                <span className="header__optionLineTwo">{userContext.user ? userContext.user.name : 'Sign In'}</span>
+                <span className="header__optionLineTwo">{user ? user.name : 'Sign In'}</span>
               </div>
             </Link>
 

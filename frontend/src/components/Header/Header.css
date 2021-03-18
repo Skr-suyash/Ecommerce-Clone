@@ -15,12 +15,17 @@
 
 .header__logo {
     display: flex;
-    flex: 0.1;
     height: 65px;
     width: 65px;
     object-fit: contain;
-    margin: 20px 20px;
-    margin-right: 20px;
+    margin: 30px 0 30px 20px;
+}
+
+.header__name {
+    margin: 0 20px;
+    font-size: 1.3em;
+    font-family: cursive;
+    color: white;
 }
 
 .header__search {

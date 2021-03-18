@@ -1,33 +1,29 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { Button, Card, Typography } from '@material-ui/core';
-import { Redirect } from 'react-router-dom';
-import { UserContext } from '../../context/userContext';
 import './BecomeSeller.css';
-import apiCalls from '../../api-config';
+import { useHistory } from 'react-router-dom';
+import apiCalls from '../../apiCalls';
 
 export default function BecomeSeller() {
-  // Context
-  const userContext = useContext(UserContext);
-
   // State
   const [error, setError] = useState(false);
+  const history = useHistory();
 
   const handleClick = async () => {
-    const response = await apiCalls.becomeSeller(userContext.user.id);
+    const user = JSON.parse(localStorage.getItem('user'));
+    const response = await apiCalls.becomeSeller(user.id);
     if (response.status !== 200) {
       setError(true);
+    } else {
+      // eslint-disable-next-line no-alert
+      alert('Successfully became seller');
+      history.push('/');
     }
   };
 
   return (
     <div className="becomeSeller">
-      { error
-        ? <h1>Error</h1>
-        : (
-          // eslint-disable-next-line no-alert
-          alert('You have successfully become a seller'),
-            <Redirect to="/" />
-        )}
+      { error ? <h1>Error</h1> : null }
       <Card className="becomeSeller__card">
         <Typography>
           <h3 className="becomeSeller__card__title"> Do you want to give this account Seller privileges? </h3>

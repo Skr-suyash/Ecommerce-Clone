@@ -4,7 +4,7 @@ import './Login.css';
 import Button from '@material-ui/core/Button';
 import ErrorIcon from '@material-ui/icons/Error';
 
-import apiCalls from '../../api-config';
+import apiCalls from '../../apiCalls';
 
 export default function Login() {
   // Initialize useHistory hook
@@ -16,6 +16,7 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(email, password);
     // eslint-disable-next-line no-console
     const response = await apiCalls.loginUser(email, password);
     if (response.status !== 200) {
